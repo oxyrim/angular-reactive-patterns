@@ -1,4 +1,5 @@
-<div *ngIf="recipes$ | async as recipes" class="container">
+@if(recipes$ | async; as recipes) {
+<div class="container">
   <div>{{ recipes.length }} Results</div>
   <div class="row row-cols-2 row-cols-lg-4 g-2 g-lg-3">
     @for(recipe of recipes; track recipe.id) {
@@ -24,3 +25,4 @@
     }
   </div>
 </div>
+}
