@@ -11,7 +11,7 @@ import { PanelModule } from 'primeng/panel';
 import { RatingModule } from 'primeng/rating';
 import { RippleModule } from 'primeng/ripple';
 import { FormsModule } from '@angular/forms';
-import { Subscription } from 'rxjs';
+import { Subject, Subscription, takeUntil } from 'rxjs';
 import { NgbRatingConfig, NgbRatingModule } from '@ng-bootstrap/ng-bootstrap';
 
 @Component({
@@ -34,7 +34,7 @@ import { NgbRatingConfig, NgbRatingModule } from '@ng-bootstrap/ng-bootstrap';
 })
 export class RecipesListComponent implements OnInit, OnDestroy {
   recipes!: Recipe[];
-  subscription!: Subscription;
+  destroy$ = new Subject<void>();
   private service = inject(RecipesService);
 
   constructor(config: NgbRatingConfig) {
@@ -43,12 +43,13 @@ export class RecipesListComponent implements OnInit, OnDestroy {
   }
 
   ngOnInit(): void {
-    this.subscription = this.service.getRecipes().subscribe(results => {
+    this.service.getRecipes().pipe(takeUntil(this.destroy$)).subscribe(results => {
       this.recipes = results;
     })
   }
 
   ngOnDestroy(): void {
-    this.subscription?.unsubscribe();
+    this.destroy$.next();
+    this.destroy$.complete();
   }
 }
