@@ -1,17 +1,7 @@
-import { Component, OnDestroy, OnInit, inject } from '@angular/core';
+import { Component, inject } from '@angular/core';
 import { Recipe } from '../core/model/recipe';
 import { RecipesService } from '../core/services/recipes.service';
 import { CommonModule } from '@angular/common';
-import { DataViewModule } from 'primeng/dataview';
-import { ButtonModule } from 'primeng/button';
-import { DialogModule } from 'primeng/dialog';
-import { DropdownModule } from 'primeng/dropdown';
-import { InputTextModule } from 'primeng/inputtext';
-import { PanelModule } from 'primeng/panel';
-import { RatingModule } from 'primeng/rating';
-import { RippleModule } from 'primeng/ripple';
-import { FormsModule } from '@angular/forms';
-import { Subject, Subscription, takeUntil } from 'rxjs';
 import { NgbRatingConfig, NgbRatingModule } from '@ng-bootstrap/ng-bootstrap';
 import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 
@@ -20,14 +10,6 @@ import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
   standalone: true,
   imports: [
     CommonModule,
-    DataViewModule,
-    PanelModule,
-    DialogModule,
-    DropdownModule,
-    InputTextModule,
-    ButtonModule,
-    RippleModule,
-    RatingModule, FormsModule,
     NgbRatingModule
   ],
   templateUrl: './recipes-list.component.html',
