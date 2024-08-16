@@ -10,8 +10,5 @@ const BASE_PATH = environment.basePath;
 })
 export class RecipesService {
   private http = inject(HttpClient);
-
-  getRecipes(): Observable<Recipe[]> {
-    return this.http.get<Recipe[]>(`${BASE_PATH}/recipes`);
-  }
+  recipes$ = this.http.get<Recipe[]>(`${BASE_PATH}/recipes`);
 }
