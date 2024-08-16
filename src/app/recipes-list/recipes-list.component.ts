@@ -32,9 +32,9 @@ import { NgbRatingConfig, NgbRatingModule } from '@ng-bootstrap/ng-bootstrap';
   templateUrl: './recipes-list.component.html',
   styleUrl: './recipes-list.component.scss'
 })
-export class RecipesListComponent implements OnInit {
+export class RecipesListComponent implements OnInit, OnDestroy {
   recipes!: Recipe[];
-
+  subscription!: Subscription;
   private service = inject(RecipesService);
 
   constructor(config: NgbRatingConfig) {
@@ -43,8 +43,12 @@ export class RecipesListComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    this.service.getRecipes().subscribe(results => {
+    this.subscription = this.service.getRecipes().subscribe(results => {
       this.recipes = results;
     })
+  }
+
+  ngOnDestroy(): void {
+    this.subscription?.unsubscribe();
   }
 }
