@@ -1,4 +1,4 @@
-import { Component, inject } from '@angular/core';
+import { ChangeDetectionStrategy, Component, inject } from '@angular/core';
 import { RecipesService } from '../core/services/recipes.service';
 import { CommonModule } from '@angular/common';
 import { NgbRatingConfig, NgbRatingModule } from '@ng-bootstrap/ng-bootstrap';
@@ -8,10 +8,11 @@ import { NgbRatingConfig, NgbRatingModule } from '@ng-bootstrap/ng-bootstrap';
   standalone: true,
   imports: [
     CommonModule,
-    NgbRatingModule
+    NgbRatingModule,
   ],
   templateUrl: './recipes-list.component.html',
-  styleUrl: './recipes-list.component.scss'
+  styleUrl: './recipes-list.component.scss',
+  changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class RecipesListComponent {
   private service = inject(RecipesService);
