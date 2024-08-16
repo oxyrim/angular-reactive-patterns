@@ -1,4 +1,4 @@
-import { Component, OnInit, inject } from '@angular/core';
+import { Component, OnDestroy, OnInit, inject } from '@angular/core';
 import { Recipe } from '../core/model/recipe';
 import { RecipesService } from '../core/services/recipes.service';
 import { CommonModule } from '@angular/common';
@@ -11,6 +11,7 @@ import { PanelModule } from 'primeng/panel';
 import { RatingModule } from 'primeng/rating';
 import { RippleModule } from 'primeng/ripple';
 import { FormsModule } from '@angular/forms';
+import { Subject, Subscription, takeUntil } from 'rxjs';
 import { NgbRatingConfig, NgbRatingModule } from '@ng-bootstrap/ng-bootstrap';
 import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 
@@ -32,16 +33,14 @@ import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
   templateUrl: './recipes-list.component.html',
   styleUrl: './recipes-list.component.scss'
 })
-export class RecipesListComponent implements OnInit {
+export class RecipesListComponent {
   recipes!: Recipe[];
   private service = inject(RecipesService);
 
   constructor(config: NgbRatingConfig) {
     config.max = 5;
     config.readonly = true;
-  }
 
-  ngOnInit(): void {
     this.service.getRecipes().pipe(takeUntilDestroyed()).subscribe(results => {
       this.recipes = results;
     })
