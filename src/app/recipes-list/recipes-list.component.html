@@ -1,0 +1,25 @@
+<div class="container">
+  <div class="row row-cols-2 row-cols-lg-4 g-2 g-lg-3">
+    @for(recipe of recipes; track recipe.id) {
+    <div class="col">
+      <div class="card">
+        <i class="bi bi-tag recipe-category-icon"></i>
+        <img
+          class="card-img-top"
+          [src]="recipe.imageUrl"
+          alt="Card image cap"
+        />
+        <div class="card-body">
+          <h5 class="card-title">{{ recipe?.title }}</h5>
+          <h6 class="card-subtitle mb-2 text-muted">{{ recipe?.title }}</h6>
+          <ngb-rating [(rate)]="recipe.rating" />
+          <div class="card-footer">
+            <h5>{{ recipe?.prepTime }}min</h5>
+            <i class="bi bi-heart"></i>
+          </div>
+        </div>
+      </div>
+    </div>
+    }
+  </div>
+</div>
