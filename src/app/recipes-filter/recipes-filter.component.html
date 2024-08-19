@@ -1,0 +1,32 @@
+<div class="recipe-filter border p-3 ms-3 position-sticky top-0">
+  <h6 class="title">Filters</h6>
+  <form class="row" [formGroup]="recipeForm">
+    <div class="clear-filter d-flex">
+      <button (click)="clearFilter()" class="btn btn-success btn-sm ms-auto">
+        Clear All
+      </button>
+    </div>
+    <div class="filter-options d-flex flex-column">
+      <label for="keyword">Keyword</label>
+      <input type="text" id="keyword" formControlName="title" />
+      <label for="category">Category</label>
+      <input type="text" id="category" formControlName="category" />
+      <label for="ingredients">Ingredients</label>
+      <input type="text" id="ingredients" formControlName="ingredients" />
+      <label for="tags">Tags</label>
+      <input type="text" id="tags" formControlName="tags" />
+      <label for="prepTime">Preparation Time</label>
+      <input type="text" id="prepTime" formControlName="prepTime" />
+      <label for="cookTime">Cooking Time</label>
+      <input type="text" id="cookTime" formControlName="cookTime" />
+    </div>
+    <div class="results-btn d-flex">
+      <button
+        (click)="filterResults()"
+        class="btn btn-success btn-sm ms-auto mt-3"
+      >
+        See Results
+      </button>
+    </div>
+  </form>
+</div>

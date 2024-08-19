@@ -1,7 +1,5 @@
 .container {
-  margin-top: 2rem;
   .row {
-    margin-top: 0.1rem;
     .card {
       padding: 0.5rem;
       cursor: pointer;
@@ -12,6 +10,7 @@
       img {
         border-radius: 10px;
         height: 15rem;
+        object-fit: cover;
       }
 
       .card-body {
