@@ -5,6 +5,8 @@ import { NgbRatingConfig, NgbRatingModule } from '@ng-bootstrap/ng-bootstrap';
 import { combineLatest } from 'rxjs';
 import { map } from 'rxjs/operators';
 import { Recipe } from '../core/model/recipe';
+import { SharedDataService } from '../core/services/shared-data.service';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-recipes-list',
@@ -19,6 +21,8 @@ import { Recipe } from '../core/model/recipe';
 })
 export class RecipesListComponent {
   private service = inject(RecipesService);
+  private sharedDataService = inject(SharedDataService);
+  private router = inject(Router)
 
   recipes$ = this.service.recipes$;
   filterRecipeAction$ = this.service.filterRecipeAction$;
@@ -33,5 +37,10 @@ export class RecipesListComponent {
       const filterTitle = filter?.title?.toLocaleLowerCase() ?? '';
       return recipes?.filter(recipe =>
         recipe?.title?.toLowerCase().includes(filterTitle));
-    }))
+    }));
+
+  viewRecipe(recipe: Recipe) {
+    this.sharedDataService.updateSelectedRecipe(recipe);
+    this.router.navigate(['/recipes/details']);
+  }
 }
