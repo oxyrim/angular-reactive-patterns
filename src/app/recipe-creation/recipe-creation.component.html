@@ -1,0 +1,120 @@
+@if(valueChanges$ | async){
+<ng-content></ng-content>
+}
+<div class="recipe-creation">
+  <h1 class="m-3 text-body-secondary">New Recipe</h1>
+
+  <div class="card m-3">
+    <div class="card-body">
+      <form [formGroup]="recipeForm">
+        <div class="row">
+          <div class="col-8 mb-3">
+            <div class="row mb-3">
+              <div class="col-6">
+                <div class="form-floating">
+                  <input
+                    class="form-control"
+                    id="title"
+                    formControlName="title"
+                  />
+                  <label for="title">Title</label>
+                </div>
+              </div>
+              <div class="col-5">
+                <div class="form-floating">
+                  <input
+                    class="form-control"
+                    id="ingredients"
+                    formControlName="ingredients"
+                  />
+                  <label for="ingredients">Ingredients</label>
+                </div>
+              </div>
+              <div class="col-1 align-self-center">
+                <i class="bi bi-plus-circle-fill"></i>
+              </div>
+            </div>
+
+            <div class="row mb-3">
+              <div class="col-5">
+                <div class="form-floating">
+                  <input
+                    class="form-control"
+                    id="imageUrl"
+                    formControlName="imageUrl"
+                  />
+                  <label for="imageUrl">Image Url</label>
+                </div>
+              </div>
+              <div class="col-1 align-self-center">
+                <i class="bi bi-upload"></i>
+              </div>
+              <div class="col-6">
+                <div class="form-floating">
+                  <input
+                    class="form-control"
+                    id="cookTime"
+                    formControlName="cookTime"
+                  />
+                  <label for="cookTime">Cooking Time</label>
+                </div>
+              </div>
+            </div>
+            <div class="row mb-3">
+              <div class="col">
+                <div class="form-floating">
+                  <input
+                    class="form-control"
+                    id="yield"
+                    formControlName="yield"
+                  />
+                  <label for="yield">Serving</label>
+                </div>
+              </div>
+              <div class="col">
+                <div class="form-floating">
+                  <input
+                    class="form-control"
+                    id="prepTime"
+                    formControlName="prepTime"
+                  />
+                  <label for="prepTime">Preparation Time</label>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="col-4">
+            <h6 class="text-body-secondary">Tags</h6>
+            @for(tag of tags; track tag.name) {
+            <div class="form-check">
+              <label>
+                <input
+                  class="form-check-input"
+                  formControlName="tags"
+                  type="radio"
+                  [value]="tag.name"
+                  name="tags"
+                />
+                {{ tag.name }}</label
+              >
+            </div>
+            }
+          </div>
+        </div>
+        <div class="form-floating mb-3">
+          <textarea
+            class="form-control"
+            id="steps"
+            formControlName="steps"
+            style="height: 100px"
+          ></textarea>
+          <label for="steps">Steps</label>
+        </div>
+        <div class="d-flex">
+          <button class="btn btn-success btn-sm ms-auto">Cancel</button>
+          <button class="btn btn-success btn-sm ms-3">Save</button>
+        </div>
+      </form>
+    </div>
+  </div>
+</div>
