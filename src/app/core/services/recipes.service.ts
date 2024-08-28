@@ -1,7 +1,7 @@
 import { Injectable, inject } from '@angular/core';
 import { environment } from '../../../environments/environment';
 import { HttpClient } from '@angular/common/http';
-import { BehaviorSubject, Observable, ReplaySubject, catchError, of, share, shareReplay, switchMap, timer } from 'rxjs';
+import { BehaviorSubject, Observable, ReplaySubject, share, switchMap, timer } from 'rxjs';
 import { Recipe } from '../model/recipe';
 const BASE_PATH = environment.basePath;
 
@@ -25,14 +25,14 @@ export class RecipesService {
 
   // share RxJs 7
   recipes$ = timer$.pipe(
-    switchMap(_ => this.http.get<Recipe[]>(`${BASE_PATH}/recipes`)),
+    switchMap(_ =>
+      this.http.get<Recipe[]>(`${BASE_PATH}/recipes`)),
     share({
-      connector: () => new ReplaySubject(),
+      connector: () => new ReplaySubject(1),
       resetOnRefCountZero: true,
       resetOnComplete: true,
       resetOnError: true
-    })
-  )
+    }))
 
   updateFilter(criteria: Recipe) {
     this.filterRecipeSubject$.next(criteria);
@@ -42,3 +42,5 @@ export class RecipesService {
     return this.http.post<Recipe>(`${BASE_PATH}/recipes/save`, formValue);
   }
 }
+
+
