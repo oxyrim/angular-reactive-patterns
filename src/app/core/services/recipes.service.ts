@@ -2,7 +2,8 @@ import { Injectable, inject } from '@angular/core';
 import { environment } from '../../../environments/environment';
 import { HttpClient } from '@angular/common/http';
 import { BehaviorSubject, Observable, ReplaySubject, share, switchMap, timer } from 'rxjs';
-import { Recipe } from '../model/recipe';
+import { Recipe } from '../model/recipe.model';
+import { UploadStatus } from '../model/upload-status.model';
 const BASE_PATH = environment.basePath;
 
 const REFRESH_INTERVAL = 30000;
@@ -32,7 +33,13 @@ export class RecipesService {
       resetOnRefCountZero: true,
       resetOnComplete: true,
       resetOnError: true
-    }))
+    }));
+
+  upload(recipeId: number | undefined | null, fileToUpload: File): Observable<UploadStatus> {
+    const formData = new FormData();
+    formData.append('fileToUpload', fileToUpload as File);
+    return this.http.post<UploadStatus>(`${BASE_PATH}/recipes/upload:${recipeId}`, formData);
+  }
 
   updateFilter(criteria: Recipe) {
     this.filterRecipeSubject$.next(criteria);
