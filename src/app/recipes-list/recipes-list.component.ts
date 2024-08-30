@@ -4,7 +4,7 @@ import { CommonModule } from '@angular/common';
 import { NgbRatingConfig, NgbRatingModule } from '@ng-bootstrap/ng-bootstrap';
 import { combineLatest } from 'rxjs';
 import { map } from 'rxjs/operators';
-import { Recipe } from '../core/model/recipe';
+import { Recipe } from '../core/model/recipe.model';
 import { SharedDataService } from '../core/services/shared-data.service';
 import { Router } from '@angular/router';
 

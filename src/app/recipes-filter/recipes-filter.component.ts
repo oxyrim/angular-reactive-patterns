@@ -1,6 +1,6 @@
 import { Component, inject } from '@angular/core';
 import { FormBuilder, ReactiveFormsModule } from '@angular/forms';
-import { Recipe } from '../core/model/recipe';
+import { Recipe } from '../core/model/recipe.model';
 import { RecipesService } from '../core/services/recipes.service';
 
 @Component({
