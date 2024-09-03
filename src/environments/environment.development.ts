@@ -1,1 +1,4 @@
-export const environment = { basePath: '/api' };
+export const environment = { 
+    basePath: '/api',
+    wsEndpoint: 'ws://localhost:8081'
+};
